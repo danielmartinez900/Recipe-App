@@ -8,7 +8,7 @@ const RecipeCard = ({recipe}) => {
   const navigation = useNavigation();
 
   const onRecipeClicked = () => {
-    navigation.navigate('RecipeDetails');
+    navigation.navigate('RecipeDetails', {recipe: recipe});
   };
 
   return (
