@@ -20,7 +20,10 @@ const styles = StyleSheet.create({
     height: 300,
     resizeMode: 'cover',
   },
-  text: {},
+  text: {
+    color: 'black',
+    fontSize: 16,
+  },
 });
 
 export default RecipeDetails;
