@@ -26,9 +26,22 @@ const HomeScreen = () => {
     {
       name: 'Avocado toast',
       prepTime: '15 mins',
-      serves: 1,
+      serves: 2,
       description: 'A quick and easy dish, yet full of flavor.',
       recipeImage: avocado_toastImage,
+      ingridientsList: [
+        'Half a large avocado',
+        '1 Egg',
+        'Lemon pepper seasoning',
+        '2 slices of sour dough bread',
+      ],
+      stepsList: [
+        'Toast bread',
+        'While bread is toasting, smash avocado in a bowl with a fork and add lemon pepper seasoning to taste',
+        'fry egg to prefered doneness',
+        'Once the bread is done toasting, smear your avocado on top, and add egg on top',
+        'enjoy!',
+      ],
     },
     {
       name: 'Tomato soup',
@@ -40,7 +53,7 @@ const HomeScreen = () => {
     {
       name: 'Banana oatmeal',
       prepTime: '10 mins',
-      serves: 1,
+      serves: 2,
       description: 'Bananas + oatmeal = a great breakfast.',
       recipeImage: oatmealImage,
     },
