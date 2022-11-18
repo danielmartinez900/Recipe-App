@@ -3,14 +3,6 @@ import {useNavigation} from '@react-navigation/native';
 import Octicons from 'react-native-vector-icons/Octicons';
 import React from 'react';
 
-interface Irecipe {
-  name: string;
-  prepTime: string;
-  serves: number;
-  description: string;
-  recipeImage: HTMLImageElement;
-}
-
 const RecipeCard = ({recipe}) => {
   const {name, prepTime, serves, description, recipeImage} = recipe;
   const navigation = useNavigation();

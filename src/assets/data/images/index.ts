@@ -4,3 +4,6 @@ export const oatmealImage = require('./oatmeal.jpg');
 export const hotCocoaImage = require('./hot-cocoa.jpg');
 export const pieImage = require('./pie.jpg');
 export const tamalesImage = require('./tamales.jpg');
+export const tunaImage = require('./tuna.jpg');
+export const salsaImage = require('./salsa.jpg');
+export const scallopImage = require('./scallops.jpg');
