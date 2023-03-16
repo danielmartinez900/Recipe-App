@@ -1,31 +1,30 @@
 import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Octicons from 'react-native-vector-icons/Octicons';
+import {RootStackParamList} from '../../navigation/RootStackParamLIst';
+import {RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
-interface Irecipe {
-  name: string;
-  prepTime: string;
-  serves: number;
-  description: string;
-  recipeImage: HTMLImageElement;
-  ingredientsList: string;
-  stepsList: string;
-}
+type RecipeDetailsNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'RecipeDetails'
+>;
+type RecipeDetailsRouteProp = RouteProp<RootStackParamList, 'RecipeDetails'>;
 
-const RecipeDetails = ({route, navigation}) => {
-  const [recipe, setRecipe] = React.useState<Irecipe | null>(null);
+type Props = {
+  navigation: RecipeDetailsNavigationProp;
+  route: RecipeDetailsRouteProp;
+};
 
-  React.useEffect(() => {
-    let {recipe} = route.params;
-    setRecipe(recipe);
-  }, [route.params]);
+const RecipeDetails = (props: Props): JSX.Element => {
+  const {recipe} = props.route.params;
 
   if (recipe) {
-    let ingredlist = [];
+    let ingredList = [];
     let stepList = [];
 
     for (let i = 0; i < recipe.ingredientsList.length; i++) {
-      ingredlist.push(
+      ingredList.push(
         <Text style={styles.text}>
           • {recipe.ingredientsList[i]} {'\n'}
         </Text>,
@@ -41,7 +40,9 @@ const RecipeDetails = ({route, navigation}) => {
     }
 
     return (
-      <ScrollView style={{backgroundColor: 'white'}} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={{backgroundColor: 'white'}}
+        showsVerticalScrollIndicator={false}>
         <View>
           <Text style={styles.title}>{recipe.name}</Text>
         </View>
@@ -66,7 +67,7 @@ const RecipeDetails = ({route, navigation}) => {
 
         <View style={{padding: 15}}>
           <Text style={styles.header}>Ingredients</Text>
-          <Text style={{marginStart: 10}}>{ingredlist}</Text>
+          <Text style={{marginStart: 10}}>{ingredList}</Text>
 
           <Text style={styles.header}>Directions</Text>
           <Text style={{marginStart: 10}}>{stepList}</Text>
@@ -100,13 +101,14 @@ const styles = StyleSheet.create({
   infoOverImagesContainer: {
     position: 'absolute',
     height: 100,
-    width: 150,
+    width: 160,
     bottom: 0,
     left: 4,
     backgroundColor: 'rgba(0,0,0,0.25)',
     justifyContent: 'space-evenly',
     borderRadius: 10,
-    padding: 5,
+    paddingStart: 5,
+    paddingEnd: 5,
   },
   icon: {
     fontSize: 35,

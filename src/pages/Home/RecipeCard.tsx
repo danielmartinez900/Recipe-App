@@ -1,35 +1,42 @@
+import React from 'react';
 import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {Recipe} from '../../shared/types';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../navigation/RootStackParamLIst';
 import Octicons from 'react-native-vector-icons/Octicons';
-import React from 'react';
 
-const RecipeCard = ({recipe}) => {
-  const {name, prepTime, serves, description, recipeImage} = recipe;
-  const navigation = useNavigation();
+type Props = {
+  recipe: Recipe;
+};
+
+const RecipeCard = (props: Props) => {
+  const {recipe} = props;
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const onRecipeClicked = () => {
-    navigation.navigate('RecipeDetails', {recipe: recipe});
+    navigation.navigate('RecipeDetails', {recipe});
   };
 
   return (
     <View style={styles.container}>
       <Pressable onPress={onRecipeClicked}>
-        <Image style={styles.image} source={recipeImage} />
-        <Text style={styles.title}>{name}</Text>
+        <Image style={styles.image} source={recipe.recipeImage} />
+        <Text style={styles.title}>{recipe.name}</Text>
 
         <View style={styles.midSection}>
           <View style={styles.iconAndText}>
             <Octicons name="clock" style={styles.icon} />
-            <Text style={styles.text}> {prepTime}</Text>
+            <Text style={styles.text}> {recipe.prepTime}</Text>
           </View>
 
           <View style={styles.iconAndText}>
             <Octicons name="people" style={styles.icon} />
-            <Text style={styles.text}> {serves}</Text>
+            <Text style={styles.text}> {recipe.serves}</Text>
           </View>
         </View>
 
-        <Text style={styles.text}>{description}</Text>
+        <Text style={styles.text}>{recipe.description}</Text>
       </Pressable>
     </View>
   );
