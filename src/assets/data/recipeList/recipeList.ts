@@ -86,7 +86,7 @@ const recipe3: Recipe = {
 
 const recipe4: Recipe = {
   key: 3,
-  name: 'Seared Scallops with White Wine',
+  name: 'Seared Scallops',
   prepTime: '30 mins',
   serves: 4,
   description: 'A light and simple dish to impress anyone.',

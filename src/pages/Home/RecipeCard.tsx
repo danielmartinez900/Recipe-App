@@ -11,11 +11,12 @@ type Props = {
 };
 
 const RecipeCard = (props: Props) => {
-  const {recipe} = props;
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const {recipe} = props;
+  const title = recipe.name;
 
   const onRecipeClicked = () => {
-    navigation.navigate('RecipeDetails', {recipe});
+    navigation.navigate('RecipeDetails', {recipe, title});
   };
 
   return (

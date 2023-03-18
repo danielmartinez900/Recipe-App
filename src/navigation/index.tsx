@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-//import {Recipe} from '../shared/types';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {RootStackParamList} from './RootStackParamLIst';
+import Header from '../shared/Header';
 
 import HomeScreen from '../pages/Home/HomeScreen';
 import RecipeDetails from '../pages/RecipeDetails/RecipeDetails';
@@ -27,7 +27,9 @@ const Navigation = () => {
         <RootStack.Screen
           name="RecipeDetails"
           component={RecipeDetails}
-          options={{headerShown: true}}
+          options={({route}) => ({
+            header: () => <Header title={route.params.title} />,
+          })}
         />
       </RootStack.Navigator>
     </NavigationContainer>

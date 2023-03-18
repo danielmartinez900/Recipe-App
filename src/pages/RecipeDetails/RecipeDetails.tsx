@@ -1,4 +1,11 @@
-import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  useWindowDimensions,
+} from 'react-native';
 import React from 'react';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {RootStackParamList} from '../../navigation/RootStackParamLIst';
@@ -18,6 +25,7 @@ type Props = {
 
 const RecipeDetails = (props: Props): JSX.Element => {
   const {recipe} = props.route.params;
+  const HEIGHT = useWindowDimensions().height;
 
   if (recipe) {
     let ingredList = [];
@@ -25,7 +33,7 @@ const RecipeDetails = (props: Props): JSX.Element => {
 
     for (let i = 0; i < recipe.ingredientsList.length; i++) {
       ingredList.push(
-        <Text style={styles.text}>
+        <Text key={i} style={styles.text}>
           • {recipe.ingredientsList[i]} {'\n'}
         </Text>,
       );
@@ -33,7 +41,7 @@ const RecipeDetails = (props: Props): JSX.Element => {
 
     for (let i = 0; i < recipe.stepsList.length; i++) {
       stepList.push(
-        <Text style={styles.text}>
+        <Text key={i} style={styles.text}>
           {i + 1}. {recipe.stepsList[i]} {'\n\n'}
         </Text>,
       );
@@ -43,33 +51,31 @@ const RecipeDetails = (props: Props): JSX.Element => {
       <ScrollView
         style={{backgroundColor: 'white'}}
         showsVerticalScrollIndicator={false}>
-        <View>
-          <Text style={styles.title}>{recipe.name}</Text>
+        <View style={[styles.imageContainer, {height: HEIGHT * 0.5}]}>
+          <Image style={styles.image} source={recipe.recipeImage} />
         </View>
 
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} source={recipe.recipeImage} />
-          <View style={styles.infoOverImagesContainer}>
-            <View style={styles.iconAndText}>
-              <Octicons name="clock" style={styles.icon} />
-              <Text style={{color: 'white', fontSize: 25}}>
-                {''} {recipe.prepTime}
-              </Text>
-            </View>
-            <View style={styles.iconAndText}>
-              <Octicons name="people" style={styles.icon} />
-              <Text style={{color: 'white', fontSize: 25}}>
-                {''} {recipe.serves} people
-              </Text>
-            </View>
+        <View style={styles.iconAndTextView}>
+          <View style={styles.iconAndText}>
+            <Octicons name="clock" style={styles.icon} />
+            <Text style={{color: 'black', fontSize: 20, fontWeight: 'bold'}}>
+              {''} {recipe.prepTime}
+            </Text>
+          </View>
+
+          <View style={styles.iconAndText}>
+            <Octicons name="people" style={styles.icon} />
+            <Text style={{color: 'black', fontSize: 20, fontWeight: 'bold'}}>
+              {''} {recipe.serves} people
+            </Text>
           </View>
         </View>
 
         <View style={{padding: 15}}>
-          <Text style={styles.header}>Ingredients</Text>
+          <Text style={styles.title}>Ingredients</Text>
           <Text style={{marginStart: 10}}>{ingredList}</Text>
 
-          <Text style={styles.header}>Directions</Text>
+          <Text style={styles.title}>Directions</Text>
           <Text style={{marginStart: 10}}>{stepList}</Text>
         </View>
       </ScrollView>
@@ -83,7 +89,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     marginVertical: 10,
-    height: 350,
+    //height: 350,
   },
   image: {
     width: '98%',
@@ -92,33 +98,19 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 10,
   },
-  title: {
-    color: 'black',
-    fontSize: 24,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-  },
-  infoOverImagesContainer: {
-    position: 'absolute',
-    height: 100,
-    width: 160,
-    bottom: 0,
-    left: 4,
-    backgroundColor: 'rgba(0,0,0,0.25)',
-    justifyContent: 'space-evenly',
-    borderRadius: 10,
-    paddingStart: 5,
-    paddingEnd: 5,
+  iconAndTextView: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   icon: {
-    fontSize: 35,
-    color: 'white',
+    fontSize: 30,
+    color: 'black',
   },
   iconAndText: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  header: {
+  title: {
     color: 'black',
     fontSize: 24,
     fontWeight: 'bold',
