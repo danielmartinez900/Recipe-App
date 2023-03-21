@@ -18,7 +18,7 @@ const HomeScreen = () => {
       <View style={[styles.header, {height: HEIGHT * 0.15}]}>
         <Text style={styles.headerText}>Welcome</Text>
         <Text style={styles.paragraphText}>
-          Here are our featured recipes for March 2023!
+          Here are our featured recipes for March 2025!
         </Text>
       </View>
 
